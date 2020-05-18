@@ -26,6 +26,14 @@
         </div>
         <div class="wizard-step">
             <div class="wizard-step-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="wizard-step-label">
+                Data Orang Tua / Wali
+            </div>
+        </div>
+        <div class="wizard-step">
+            <div class="wizard-step-icon">
                 <i class="fas fa-sticky-note"></i>
             </div>
             <div class="wizard-step-label">
@@ -157,7 +165,7 @@
 
 <div class="row">
     <div class="col-12 col-md-3 ml-auto">
-        <button class="btn btn-primary btn-block btn-lg">Selanjutnya <i class="fa fa-chevron-right"></i></button>
+        <a href="{{ url('/isi_formulir/2') }}" class="btn btn-primary btn-block btn-lg">Selanjutnya <i class="fa fa-chevron-right"></i></a>
     </div>
 </div>
 @endsection

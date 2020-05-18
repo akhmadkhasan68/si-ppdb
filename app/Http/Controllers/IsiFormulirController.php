@@ -20,4 +20,14 @@ class IsiFormulirController extends Controller
     {
         return view('formulir.sekolah_asal');
     }
+
+    public function orangTuaView()
+    {
+        return view('formulir.orang_tua');
+    }
+
+    public function transkripNilaiView()
+    {
+        return view('formulir.transkrip_nilai');
+    }
 }

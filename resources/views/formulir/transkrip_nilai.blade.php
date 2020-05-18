@@ -16,7 +16,7 @@
                 Data Diri
             </div>
         </div>
-        <div class="wizard-step wizard-step-active">
+        <div class="wizard-step wizard-step-success">
             <div class="wizard-step-icon">
                 <i class="fas fa-school"></i>
             </div>
@@ -24,7 +24,7 @@
                 Sekolah Asal
             </div>
         </div>
-        <div class="wizard-step">
+        <div class="wizard-step wizard-step-success">
             <div class="wizard-step-icon">
                 <i class="fas fa-users"></i>
             </div>
@@ -32,7 +32,7 @@
                 Data Orang Tua / Wali
             </div>
         </div>
-        <div class="wizard-step">
+        <div class="wizard-step wizard-step-active">
             <div class="wizard-step-icon">
                 <i class="fas fa-sticky-note"></i>
             </div>
@@ -63,7 +63,7 @@
 <div class="row my-3">
     <div class="col-md-12">
         <div class="card card-primary">
-            <div class="card-header"><h4>Sekolah Asal</h4></div>
+            <div class="card-header"><h4>Transkrip Nilai</h4></div>
 
             <div class="card-body">
                 <form method="POST" id="myform-2">
@@ -119,10 +119,10 @@
 
 <div class="row">
     <div class="col-6 col-md-3 mr-auto">
-        <a href="{{ url('/isi_formulir') }}" class="btn btn-secondary btn-block btn-lg"><i class="fa fa-chevron-left"></i> Sebelumnya</a>
+        <a href="{{ url('/isi_formulir/3') }}" class="btn btn-secondary btn-block btn-lg"><i class="fa fa-chevron-left"></i> Sebelumnya</a>
     </div>
     <div class="col-6 col-md-3 ml-auto">
-        <a href="{{ url('/isi_formulir/3') }}" class="btn btn-primary btn-block btn-lg">Selanjutnya <i class="fa fa-chevron-right"></i></a>
+        <a href="" class="btn btn-primary btn-block btn-lg">Selanjutnya <i class="fa fa-chevron-right"></i></a>
     </div>
 </div>
 @endsection
