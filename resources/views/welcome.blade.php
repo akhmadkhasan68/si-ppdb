@@ -1,100 +1,75 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('header')
+<h1>Home</h1>
+<!-- <div class="section-header-breadcrumb">
+    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+    <div class="breadcrumb-item"><a href="#">Layout</a></div>
+    <div class="breadcrumb-item">Top Navigation</div>
+</div> -->
+@endsection
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+@section('content')
+<div class="row">
+    <div class="col-12 col-sm-6 col-lg-6">
+        <h2 class="section-title">PPDB {sekolah} Tahun 2020/2021</h2>
+        <p class="section-lead">
+            {sekolah} membuka pendaftaran peserta didik baru atau PPDB untuk siswa tahun ajaran 2020/2021.
+        </p>
+    </div>
+</div>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+<div class="row">
+    <div class="col-12 col-sm-8 col-lg-8">
+        <div class="card">
+            <div class="card-body">
+                <div class="owl-carousel owl-theme slider" id="slider2">
+                    <div><img alt="image" src="{{ asset('img/news/img01.jpg') }}">
+                    <div class="slider-caption">
+                        <div class="slider-title">Image 1</div>
+                        <div class="slider-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.</div>
+                    </div>
+                    </div>
+                    <div><img alt="image" src="{{ asset('img/news/img08.jpg') }}">
+                    <div class="slider-caption">
+                        <div class="slider-title">Image 2</div>
+                        <div class="slider-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.</div>
+                    </div>
+                    </div>
+                    <div><img alt="image" src="{{ asset('img/news/img10.jpg') }}">
+                    <div class="slider-caption">
+                        <div class="slider-title">Image 3</div>
+                        <div class="slider-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.</div>
+                    </div>
+                    </div>
+                    <div><img alt="image" src="{{ asset('img/news/img09.jpg') }}">
+                    <div class="slider-caption">
+                        <div class="slider-title">Image 4</div>
+                        <div class="slider-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua.</div>
+                    </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+    <div class="col-12 col-sm-4 col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h4>Informasi Penting</h4>
+            </div>
+            <div class="card-body">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
