@@ -24,3 +24,4 @@ Route::get('/home', function () {
 });
 
 Route::get('/isi_formulir', 'IsiFormulirController@index')->middleware('siswa')->name('isi_formulir');
+Route::get('/isi_formulir/2', 'IsiFormulirController@sekolahAsalView')->middleware('siswa')->name('isi_formulir');

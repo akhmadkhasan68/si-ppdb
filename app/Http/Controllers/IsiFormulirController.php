@@ -15,4 +15,9 @@ class IsiFormulirController extends Controller
     {
         return view('formulir.isi_data');
     }
+
+    public function sekolahAsalView()
+    {
+        return view('formulir.sekolah_asal');
+    }
 }
