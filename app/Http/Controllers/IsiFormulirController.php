@@ -35,4 +35,9 @@ class IsiFormulirController extends Controller
     {
         return view('formulir.dokumen_pendukung');
     }
+
+    public function simpanPermanen()
+    {
+        return view('formulir.simpan_permanen');
+    }
 }
