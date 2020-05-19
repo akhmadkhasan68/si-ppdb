@@ -30,4 +30,9 @@ class IsiFormulirController extends Controller
     {
         return view('formulir.transkrip_nilai');
     }
+
+    public function dokumenPendukung()
+    {
+        return view('formulir.dokumen_pendukung');
+    }
 }

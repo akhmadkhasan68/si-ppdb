@@ -138,7 +138,7 @@
         <a href="{{ url('/isi_formulir/3') }}" class="btn btn-secondary btn-block btn-lg"><i class="fa fa-chevron-left"></i> Sebelumnya</a>
     </div>
     <div class="col-6 col-md-3 ml-auto">
-        <a href="" class="btn btn-primary btn-block btn-lg">Selanjutnya <i class="fa fa-chevron-right"></i></a>
+        <a href="{{ url('/isi_formulir/5') }}" class="btn btn-primary btn-block btn-lg">Selanjutnya <i class="fa fa-chevron-right"></i></a>
     </div>
 </div>
 @endsection
