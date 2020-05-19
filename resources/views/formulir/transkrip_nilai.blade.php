@@ -60,7 +60,7 @@
     </div>
 </div>
 
-<div class="row my-3">
+<div class="row my-4">
     <div class="col-md-12">
         <div class="card card-primary">
             <div class="card-header"><h4>Transkrip Nilai</h4></div>
@@ -68,39 +68,55 @@
             <div class="card-body">
                 <form method="POST" id="myform-2">
                     @csrf
+                    <h4>Nilai Ujian Nasional</h4>
+                    <hr>
+                    
                     <div class="row">
-                        <div class="form-group col-12 col-md-6">
-                            <label for="nama_sekolah">Nama Sekolah <span class="text-danger">*</span></label>
-                            <input id="nama_sekolah" type="text" class="form-control" name="nama_sekolah" placeholder="Masukkan sekolah asal" autofocus required>
+                        <div class="form-group col-12 col-md-3">
+                            <label for="matematika">Matematika <span class="text-danger">*</span></label>
+                            <input id="matematika" type="text" class="form-control" name="matematika" placeholder="Masukkan nilai Matematika" autofocus required>
                         </div>
-                        <div class="form-group col-12 col-md-6">
-                            <label for="npsn">NPSN <span class="text-danger">*</span></label>
-                            <input id="npsn" type="text" class="form-control" placeholder="Masukkan NISN" name="npsn" required>
+                        <div class="form-group col-12 col-md-3">
+                            <label for="bahasa_indonesia">Bahasa Indonesia <span class="text-danger">*</span></label>
+                            <input id="bahasa_indonesia" type="text" class="form-control" name="bahasa_indonesia" placeholder="Masukkan nilai Bahasa Indonesia" autofocus required>
+                        </div>
+                        <div class="form-group col-12 col-md-3">
+                            <label for="bahasa_inggris">Bahasa Inggris <span class="text-danger">*</span></label>
+                            <input id="bahasa_inggris" type="text" class="form-control" name="bahasa_inggris" placeholder="Masukkan nilai Bahasa Inggris" autofocus required>
+                        </div>
+                        <div class="form-group col-12 col-md-3">
+                            <label for="ipa">IPA <span class="text-danger">*</span></label>
+                            <input id="ipa" type="text" class="form-control" name="ipa" placeholder="Masukkan nilai IPA" autofocus required>
                         </div>
                     </div>
+                    
+                    <h4>Rata-rata Nilai Raport</h4>
+                    <hr>
+
                     <div class="row">
-                        <div class="form-group col-12 col-md-6">
-                            <label for="jenis_sekolah">Jenis Sekolah <span class="text-danger">*</span></label>
-                            <select name="jenis_sekolah" id="jenis_sekolah" class="form-control" required>
-                                <option value="">Jenis Sekolah</option>
-                                <option value="Negeri">Negeri</option>
-                                <option value="Swasta">Swasta</option>
-                            </select>
+                        <div class="form-group col-12 col-md-2">
+                            <label for="sem_1">Semester 1 <span class="text-danger">*</span></label>
+                            <input id="sem_1" type="text" class="form-control" name="sem_1" placeholder="Semester 1" autofocus required>
                         </div>
-                        <div class="form-group col-12 col-md-6">
-                            <label for="tahun_lulus">Tahun Lulus <span class="text-danger">*</span></label>
-                            <select name="tahun_lulus" id="tahun_lulus" class="form-control" required>
-                                <option value="">Tahun Lulus</option>
-                                <?php for($i = 2010; $i <= date('Y'); $i++){?>
-                                    <option value="{{ $i }}">{{ $i }}</option>
-                                <?php }?>
-                            </select>
+                        <div class="form-group col-12 col-md-2">
+                            <label for="sem_2">Semester 2 <span class="text-danger">*</span></label>
+                            <input id="sem_2" type="text" class="form-control" name="sem_2" placeholder="Semester 2" autofocus required>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-12 col-md-12">
-                            <label for="alamat">Alamat <span class="text-danger">*</span></label>
-                            <textarea name="alamat" id="alamat" cols="30" rows="10" placeholder="Masukkan alamat sekolah" class="form-control"></textarea>
+                        <div class="form-group col-12 col-md-2">
+                            <label for="sem_3">Semester 3 <span class="text-danger">*</span></label>
+                            <input id="sem_3" type="text" class="form-control" name="sem_3" placeholder="Semester 3" autofocus required>
+                        </div>
+                        <div class="form-group col-12 col-md-2">
+                            <label for="sem_4">Semester 4 <span class="text-danger">*</span></label>
+                            <input id="sem_4" type="text" class="form-control" name="sem_4" placeholder="Semester 4" autofocus required>
+                        </div>
+                        <div class="form-group col-12 col-md-2">
+                            <label for="sem_5">Semester 5 <span class="text-danger">*</span></label>
+                            <input id="sem_5" type="text" class="form-control" name="sem_5" placeholder="Semester 5" autofocus required>
+                        </div>
+                        <div class="form-group col-12 col-md-2">
+                            <label for="sem_6">Semester 6 <span class="text-danger">*</span></label>
+                            <input id="sem_6" type="text" class="form-control" name="sem_6" placeholder="Semester 6" autofocus required>
                         </div>
                     </div>
 
