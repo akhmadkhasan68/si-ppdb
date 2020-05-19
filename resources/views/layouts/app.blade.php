@@ -72,8 +72,8 @@
                         <li class="nav-item  @if(Request::route()->getName() == 'pengumuman') active @endif">
                             <a href="{{ url('/pengumuman') }}" class="nav-link"><i class="fas fa-bullhorn"></i><span>Pengumuman</span></a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{ url('/') }}" class="nav-link"><i class="fa fa-info"></i><span>Tentang Aplikasi</span></a>
+                        <li class="nav-item @if(Request::route()->getName() == 'tentang_aplikasi') active @endif">
+                            <a href="{{ url('/tentang_aplikasi') }}" class="nav-link"><i class="fa fa-info"></i><span>Tentang Aplikasi</span></a>
                         </li>
                         @guest
                             <li class="nav-item  @if(Request::route()->getName() == 'register') active @endif">

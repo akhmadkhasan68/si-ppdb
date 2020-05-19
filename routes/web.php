@@ -32,3 +32,5 @@ Route::get('/isi_formulir/5', 'IsiFormulirController@dokumenPendukung')->middlew
 Route::get('/isi_formulir/6', 'IsiFormulirController@simpanPermanen')->middleware('siswa')->name('isi_formulir');
 
 Route::get('/pengumuman', 'PengumumanController@index')->name('pengumuman');
+
+Route::get('/tentang_aplikasi', 'TentangAplikasiController@index')->name('tentang_aplikasi');
