@@ -24,8 +24,11 @@ Route::get('/home', function () {
 });
 
 Route::get('/isi_formulir', 'IsiFormulirController@index')->middleware('siswa')->name('isi_formulir');
+Route::get('/isi_formulir/1', 'IsiFormulirController@index')->middleware('siswa')->name('isi_formulir');
 Route::get('/isi_formulir/2', 'IsiFormulirController@sekolahAsalView')->middleware('siswa')->name('isi_formulir');
 Route::get('/isi_formulir/3', 'IsiFormulirController@orangTuaView')->middleware('siswa')->name('isi_formulir');
 Route::get('/isi_formulir/4', 'IsiFormulirController@transkripNilaiView')->middleware('siswa')->name('isi_formulir');
 Route::get('/isi_formulir/5', 'IsiFormulirController@dokumenPendukung')->middleware('siswa')->name('isi_formulir');
 Route::get('/isi_formulir/6', 'IsiFormulirController@simpanPermanen')->middleware('siswa')->name('isi_formulir');
+
+Route::get('/pengumuman', 'PengumumanController@index')->name('pengumuman');
