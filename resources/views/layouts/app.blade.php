@@ -52,7 +52,7 @@
             <nav class="navbar navbar-secondary navbar-expand-lg">
                 <div class="container">
                     <ul class="navbar-nav">
-                        <li class="nav-item @if(Request::route()->getName() == '') active @endif">
+                        <li class="nav-item @if(Request::route()->getName() == '' || Request::route()->getName() == 'home') active @endif">
                             <a href="{{ url('/') }}" class="nav-link"><i class="fa fa-home"></i><span>Home</span></a>
                         </li>
                         @if (Auth::check())

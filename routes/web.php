@@ -19,17 +19,22 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', function () {
-    return view('welcome');
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::middleware(['siswa'])->group(function () {
+    Route::get('/isi_formulir', 'IsiFormulirController@index')->name('isi_formulir');
+    Route::get('/isi_formulir/1', 'IsiFormulirController@index')->name('isi_formulir');
+    Route::get('/isi_formulir/2', 'IsiFormulirController@sekolahAsalView')->name('isi_formulir');
+    Route::get('/isi_formulir/3', 'IsiFormulirController@orangTuaView')->name('isi_formulir');
+    Route::get('/isi_formulir/4', 'IsiFormulirController@transkripNilaiView')->name('isi_formulir');
+    Route::get('/isi_formulir/5', 'IsiFormulirController@dokumenPendukung')->name('isi_formulir');
+    Route::get('/isi_formulir/6', 'IsiFormulirController@simpanPermanen')->name('isi_formulir');
 });
 
-Route::get('/isi_formulir', 'IsiFormulirController@index')->middleware('siswa')->name('isi_formulir');
-Route::get('/isi_formulir/1', 'IsiFormulirController@index')->middleware('siswa')->name('isi_formulir');
-Route::get('/isi_formulir/2', 'IsiFormulirController@sekolahAsalView')->middleware('siswa')->name('isi_formulir');
-Route::get('/isi_formulir/3', 'IsiFormulirController@orangTuaView')->middleware('siswa')->name('isi_formulir');
-Route::get('/isi_formulir/4', 'IsiFormulirController@transkripNilaiView')->middleware('siswa')->name('isi_formulir');
-Route::get('/isi_formulir/5', 'IsiFormulirController@dokumenPendukung')->middleware('siswa')->name('isi_formulir');
-Route::get('/isi_formulir/6', 'IsiFormulirController@simpanPermanen')->middleware('siswa')->name('isi_formulir');
+
+Route::middleware(['admin'])->group(function () {
+    Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+});
 
 Route::get('/pengumuman', 'PengumumanController@index')->name('pengumuman');
 
