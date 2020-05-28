@@ -20,56 +20,17 @@
 
 <div class="row">
 	<div class="col-lg-4 col-md-4 col-sm-4 col-12">
-		<!-- <div class="card card-statistic-1">
-			<div class="card-icon bg-primary">
-				<i class="far fa-user"></i>
-			</div>
-			<div class="card-wrap">
-				<div class="card-header">
-					<h4>Semua Data</h4>
-				</div>
-				<div class="card-body">
-                    10
-                </div>
-		    </div>
-        </div> -->
-        <button type="button" class="btn btn-primary btn-lg btn-block">
+        <button type="button" class="btn btn-primary btn-lg btn-block" id="semua-data-btn">
             Semua Data <span class="badge badge-transparent">4</span>
         </button>
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-12">
-		<!-- <div class="card card-statistic-1">
-			<div class="card-icon bg-warning">
-				<i class="far fa-user"></i>
-			</div>
-			<div class="card-wrap">
-				<div class="card-header">
-					<h4>Belum Diverifikasi</h4>
-				</div>
-				<div class="card-body">
-                    1,201
-                </div>
-			</div>
-        </div> -->
-        <button type="button" class="btn btn-warning btn-lg btn-block">
+        <button type="button" class="btn btn-warning btn-lg btn-block" id="belum-diverifikasi-btn">
             Belum Diverifikasi <span class="badge badge-transparent">4</span>
         </button>
 	</div>
 	<div class="col-lg-4 col-md-4 col-sm-4 col-12">
-		<!-- <div class="card card-statistic-1">
-			<div class="card-icon bg-success">
-				<i class="far fa-user"></i>
-			</div>
-			<div class="card-wrap">
-				<div class="card-header">
-					<h4>Sudah Diverifikasi</h4>
-				</div>
-				<div class="card-body">
-                    47
-                </div>
-			</div>
-        </div> -->
-        <button type="button" class="btn btn-success btn-lg btn-block">
+        <button type="button" class="btn btn-success btn-lg btn-block" id="sudah-diverifikasi-btn">
             Sudah Diverifikasi <span class="badge badge-transparent">4</span>
         </button>
 	</div>
@@ -184,4 +145,31 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function(){
+        $('#belum-diverifikasi').hide();
+        $('#sudah-diverifikasi').hide();
+
+        $("#semua-data-btn").click(function(){
+            $('#semua-data').slideDown();
+            $('#belum-diverifikasi').hide();
+            $('#sudah-diverifikasi').hide();
+        });
+
+        $("#belum-diverifikasi-btn").click(function(){
+            $('#semua-data').hide();
+            $('#belum-diverifikasi').slideDown();
+            $('#sudah-diverifikasi').hide();
+        });
+
+        $("#sudah-diverifikasi-btn").click(function(){
+            $('#semua-data').hide();
+            $('#belum-diverifikasi').hide();
+            $('#sudah-diverifikasi').slideDown();
+        });
+    });
+</script>
 @endsection
