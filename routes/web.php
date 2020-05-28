@@ -34,6 +34,8 @@ Route::middleware(['siswa'])->group(function () {
 
 Route::middleware(['admin'])->group(function () {
     Route::get('/dashboard', 'Admin\DashboardController@index')->name('dashboard');
+    Route::get('/data_pendaftaran', 'Admin\PendaftaranController@index')->name('data_pendaftaran');
+    Route::get('/data_pendaftaran/detail/{id}', 'Admin\PendaftaranController@detail')->name('data_pendaftaran');
 });
 
 Route::get('/pengumuman', 'PengumumanController@index')->name('pengumuman');
