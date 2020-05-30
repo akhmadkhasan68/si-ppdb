@@ -115,8 +115,8 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-12 col-md-6">
-                            <label for="email">E-Mail</label>
-                            <input id="email" type="text" class="form-control"  placeholder="Masukkan E-Mail anda" name="email">
+                            <label for="email">E-Mail <span class="text-danger">*</span></label>
+                            <input id="email" type="text" class="form-control"  placeholder="Masukkan E-Mail anda" name="email" required>
                         </div>
                         <div class="form-group col-12 col-md-6">
                             <label for="no_hp">Nomor Handphone <span class="text-danger">*</span></label>
