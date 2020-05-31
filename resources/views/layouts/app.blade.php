@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="{{ asset('modules/owlcarousel2/dist/assets/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('modules/owlcarousel2/dist/assets/owl.theme.default.min.css') }}">
     <link rel="stylesheet" href="{{ asset('modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('modules/izitoast/css/iziToast.min.css') }}">
 
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -36,8 +37,22 @@
     <script src="{{ asset('modules/nicescroll/jquery.nicescroll.min.js') }}"></script>
     <script src="{{ asset('modules/moment.min.js') }}"></script>
     <script src="{{ asset('js/stisla.js') }}"></script>
+
+    <style>
+        .loader {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            background: url('{{asset("loading.gif")}}') 50% 50% no-repeat rgb(249, 249, 249);
+            opacity: .8;
+        }
+    </style>
 </head>
 <body class="layout-3">
+    <div class="loader"></div>
     <div id="app">
         <div class="main-wrapper container">
             <div class="navbar-bg"></div>
@@ -122,13 +137,25 @@
     <script src="{{ asset('modules/owlcarousel2/dist/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js') }}"></script>
     <script src="{{ asset('modules/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('modules/sweetalert/sweetalert.min.js') }}"></script>
+    <script src="{{ asset('modules/izitoast/js/iziToast.min.js') }}"></script>
 
     <!-- Page Specific JS File -->
     <script src="{{ asset('js/page/modules-slider.js') }}"></script>
     <script src="{{ asset('js/page/forms-advanced-forms.js') }}"></script>
+    <script src="{{ asset('js/page/modules-sweetalert.js') }}"></script>
+    <script src="{{ asset('js/page/modules-toastr.js') }}"></script>
 
     <!-- Template JS File -->
     <script src="{{ asset('js/scripts.js') }}"></script>
     <script src="{{ asset('js/custom.js') }}"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $('.loader').hide();
+        });
+    </script>
+
+    @yield('js')
 </body>
 </html>
