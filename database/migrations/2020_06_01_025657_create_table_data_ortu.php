@@ -28,7 +28,7 @@ class CreateTableDataOrtu extends Migration
             $table->string('nama_ibu', 100);
             $table->enum('pendidikan_ibu', ['SD/MI', 'SMP/MTs', 'SMA/SMK', 'Diploma', 'S1', 'S2', 'S3']);
             $table->enum('pekerjaan_ibu', ['Ibu Rumah Tangga', 'Buruh', 'Tani', 'Wiraswasta', 'PNS', 'TNI/Polri', 'Perangkat Desa', 'Nelayan', 'Lainnya']);
-            $table->string('gaji_ibu', 100);
+            $table->string('gaji_ibu', 100)->nullable();
             $table->text('alamat_ibu');
             $table->string('kota_ibu', 100);
             $table->string('provinsi_ibu', 100);

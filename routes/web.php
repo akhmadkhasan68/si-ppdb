@@ -29,12 +29,16 @@ Route::middleware(['siswa'])->group(function () {
     Route::get('/isi_formulir/4', 'IsiFormulirController@transkripNilaiView')->name('isi_formulir');
     Route::get('/isi_formulir/5', 'IsiFormulirController@dokumenPendukung')->name('isi_formulir');
     Route::get('/isi_formulir/6', 'IsiFormulirController@simpanPermanen')->name('isi_formulir');
+    Route::get('/isi_formulir/ajax_get_data_diri', 'IsiFormulirController@ajax_get_data_diri');
 
     Route::post('/isi_formulir/ajax_action_add_data_diri', 'IsiFormulirController@ajax_action_add_data_diri');
     Route::patch('/isi_formulir/ajax_action_update_data_diri', 'IsiFormulirController@ajax_action_update_data_diri');
 
     Route::post('/isi_formulir/ajax_action_add_sekolah_asal', 'IsiFormulirController@ajax_action_add_sekolah_asal');
     Route::patch('/isi_formulir/ajax_action_update_sekolah_asal', 'IsiFormulirController@ajax_action_update_sekolah_asal');
+
+    Route::post('/isi_formulir/ajax_action_add_data_ortu', 'IsiFormulirController@ajax_action_add_data_ortu');
+    Route::patch('/isi_formulir/ajax_action_update_data_ortu', 'IsiFormulirController@ajax_action_update_data_ortu');
 });
 
 

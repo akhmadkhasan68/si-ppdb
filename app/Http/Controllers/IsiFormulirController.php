@@ -7,6 +7,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\AsalSekolah;
 use App\dataDiri;
+use App\DataOrtu;
 use DataTables;
 use Validator;
 use App\User;
@@ -24,6 +25,7 @@ class IsiFormulirController extends Controller
         $data['user_data'] = User::find(Auth::user()->id);
         $data['count'] = dataDiri::where('user_id', Auth::user()->id)->get();
         $data['count_asal_sekolah'] = AsalSekolah::where('user_id', Auth::user()->id)->get();
+        $data['count_data_ortu'] = DataOrtu::where('user_id', Auth::user()->id)->get();
 
         return view('formulir.isi_data', $data);
     }
@@ -239,6 +241,7 @@ class IsiFormulirController extends Controller
         $data['data'] = AsalSekolah::where('user_id', Auth::user()->id)->first();
         $data['user_data'] = User::find(Auth::user()->id);
         $data['count'] = AsalSekolah::where('user_id', Auth::user()->id)->get();
+        $data['count_data_ortu'] = DataOrtu::where('user_id', Auth::user()->id)->get();
 
         return view('formulir.sekolah_asal', $data);
     }
@@ -380,7 +383,223 @@ class IsiFormulirController extends Controller
 
     public function orangTuaView()
     {
-        return view('formulir.orang_tua');
+        $data['data'] = DataOrtu::where('user_id', Auth::user()->id)->first();
+        $data['user_data'] = User::find(Auth::user()->id);
+        $data['count'] = DataOrtu::where('user_id', Auth::user()->id)->get();
+
+        return view('formulir.orang_tua', $data);
+    }
+
+    public function ajax_get_data_diri()
+    {
+        $data = dataDiri::where('user_id', Auth::user()->id)->first();
+
+        $json_data = [
+            'result' => true,
+            'data' => $data
+        ];
+
+        return json_encode($json_data);
+    }
+
+    public function ajax_action_add_data_ortu(Request $request)
+    {
+        $attrs = [
+            'nama_ayah' => 'Nama Ayah',
+            'pendidikan_ayah' => 'Pendidikan Ayah',
+            'pekerjaan_ayah' => 'Pekerjaan Ayah',
+            'gaji_ayah' => 'Gaji Ayah',
+            'alamat_ayah' => 'Alamat Ayah',
+            'kota_ayah' => 'Kota Ayah',
+            'provinsi_ayah' => 'Provinsi Ayah',
+            'kode_pos_ayah' => 'Kode Pos Ayah',
+            'nama_ibu' => 'Nama Ibu',
+            'pendidikan_ibu' => 'Pendidikan Ibu',
+            'pekerjaan_ibu' => 'Pekerjaan Ibu',
+            'gaji_ibu' => 'Gaji Ibu',
+            'alamat_ibu' => 'Alamat Ibu',
+            'kota_ibu' => 'Kota Ibu',
+            'provinsi_ibu' => 'Provinsi Ibu',
+            'kode_pos_ibu' => 'Kode Pos Ibu'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => [
+                'required',
+                Rule::unique('table_data_ortu')
+            ],
+            'nama_ayah' => 'required',
+            'pendidikan_ayah' => 'required',
+            'pekerjaan_ayah' => 'required',
+            'gaji_ayah' => 'required',
+            'alamat_ayah' => 'required',
+            'kota_ayah' => 'required',
+            'provinsi_ayah' => 'required',
+            'kode_pos_ayah' => 'required',
+            'nama_ibu' => 'required',
+            'pendidikan_ibu' => 'required',
+            'pekerjaan_ibu' => 'required',
+            'alamat_ibu' => 'required',
+            'kota_ibu' => 'required',
+            'provinsi_ibu' => 'required',
+            'kode_pos_ibu' => 'required'
+        ]);
+        $validator->setAttributeNames($attrs);
+
+        if($validator->fails())
+        {   
+            $errors = $validator->errors();
+            $json_data = [
+                'result' => false,
+                'form_error' => $errors->all(),
+                'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+                'redirect' => ''
+            ];
+
+            return json_encode($json_data); 
+            die();
+        }
+
+        $dataOrtu = DataOrtu::create([
+            'user_id' => $request->user_id,
+            'nama_ayah' => $request->nama_ayah,
+            'pendidikan_ayah' => $request->pendidikan_ayah,
+            'pekerjaan_ayah' => $request->pekerjaan_ayah,
+            'gaji_ayah' => $request->gaji_ayah,
+            'alamat_ayah' => $request->alamat_ayah,
+            'kota_ayah' => $request->kota_ayah,
+            'provinsi_ayah' => $request->provinsi_ayah,
+            'kode_pos_ayah' => $request->kode_pos_ayah,
+            'nama_ibu' => $request->nama_ibu,
+            'pendidikan_ibu' => $request->pendidikan_ibu,
+            'pekerjaan_ibu' => $request->pekerjaan_ibu,
+            'gaji_ibu' => $request->gaji_ibu,
+            'alamat_ibu' => $request->alamat_ibu,
+            'kota_ibu' => $request->kota_ibu,
+            'provinsi_ibu' => $request->provinsi_ibu,
+            'kode_pos_ibu' => $request->kode_pos_ibu
+        ]);
+
+        if(!$dataOrtu)
+        {
+            $json_data = [
+                'result' => false,
+                'form_error' => '',
+                'message' => ['head' => 'Gagal', 'body' => 'Ada kesalahan saat memasukkan data. Lakukan beberapa saat lagi!'],
+                'redirect' => ''
+            ];
+            return json_encode($json_data); 
+            die();
+        }
+
+        $json_data = [
+            'result' => true,
+            'form_error' => '',
+            'message' => ['head' => 'Berhasil', 'body' => 'Berhasil menambahkan data!'],
+            'redirect' => '/isi_formulir/3'
+        ];
+
+        return json_encode($json_data);
+    }
+
+    public function ajax_action_update_data_ortu(Request $request)
+    {
+        $attrs = [
+            'nama_ayah' => 'Nama Ayah',
+            'pendidikan_ayah' => 'Pendidikan Ayah',
+            'pekerjaan_ayah' => 'Pekerjaan Ayah',
+            'gaji_ayah' => 'Gaji Ayah',
+            'alamat_ayah' => 'Alamat Ayah',
+            'kota_ayah' => 'Kota Ayah',
+            'provinsi_ayah' => 'Provinsi Ayah',
+            'kode_pos_ayah' => 'Kode Pos Ayah',
+            'nama_ibu' => 'Nama Ibu',
+            'pendidikan_ibu' => 'Pendidikan Ibu',
+            'pekerjaan_ibu' => 'Pekerjaan Ibu',
+            'gaji_ibu' => 'Gaji Ibu',
+            'alamat_ibu' => 'Alamat Ibu',
+            'kota_ibu' => 'Kota Ibu',
+            'provinsi_ibu' => 'Provinsi Ibu',
+            'kode_pos_ibu' => 'Kode Pos Ibu'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => [
+                'required',
+                Rule::unique('table_data_ortu')->ignore($request->id)
+            ],
+            'nama_ayah' => 'required',
+            'pendidikan_ayah' => 'required',
+            'pekerjaan_ayah' => 'required',
+            'gaji_ayah' => 'required',
+            'alamat_ayah' => 'required',
+            'kota_ayah' => 'required',
+            'provinsi_ayah' => 'required',
+            'kode_pos_ayah' => 'required',
+            'nama_ibu' => 'required',
+            'pendidikan_ibu' => 'required',
+            'pekerjaan_ibu' => 'required',
+            'alamat_ibu' => 'required',
+            'kota_ibu' => 'required',
+            'provinsi_ibu' => 'required',
+            'kode_pos_ibu' => 'required'
+        ]);
+        $validator->setAttributeNames($attrs);
+
+        if($validator->fails())
+        {   
+            $errors = $validator->errors();
+            $json_data = [
+                'result' => false,
+                'form_error' => $errors->all(),
+                'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+                'redirect' => ''
+            ];
+
+            return json_encode($json_data); 
+            die();
+        }
+
+        $dataOrtu = DataOrtu::find($request->id);
+        $dataOrtu->user_id = $request->user_id;
+        $dataOrtu->nama_ayah = $request->nama_ayah;
+        $dataOrtu->pendidikan_ayah = $request->pendidikan_ayah;
+        $dataOrtu->pekerjaan_ayah = $request->pekerjaan_ayah;
+        $dataOrtu->gaji_ayah = $request->gaji_ayah;
+        $dataOrtu->alamat_ayah = $request->alamat_ayah;
+        $dataOrtu->kota_ayah = $request->kota_ayah;
+        $dataOrtu->provinsi_ayah = $request->provinsi_ayah;
+        $dataOrtu->kode_pos_ayah = $request->kode_pos_ayah;
+        $dataOrtu->nama_ibu = $request->nama_ibu;
+        $dataOrtu->pendidikan_ibu = $request->pendidikan_ibu;
+        $dataOrtu->pekerjaan_ibu = $request->pekerjaan_ibu;
+        $dataOrtu->gaji_ibu = $request->gaji_ibu;
+        $dataOrtu->alamat_ibu = $request->alamat_ibu;
+        $dataOrtu->kota_ibu = $request->kota_ibu;
+        $dataOrtu->provinsi_ibu = $request->provinsi_ibu;
+        $dataOrtu->kode_pos_ibu = $request->kode_pos_ibu;
+        $dataOrtu->save();
+
+        if(!$dataOrtu)
+        {
+            $json_data = [
+                'result' => false,
+                'form_error' => '',
+                'message' => ['head' => 'Gagal', 'body' => 'Ada kesalahan saat mengubah data. Lakukan beberapa saat lagi!'],
+                'redirect' => ''
+            ];
+            return json_encode($json_data); 
+            die();
+        }
+
+        $json_data = [
+            'result' => true,
+            'form_error' => '',
+            'message' => ['head' => 'Berhasil', 'body' => 'Berhasil mengubah data!'],
+            'redirect' => '/isi_formulir/3'
+        ];
+
+        return json_encode($json_data);
     }
 
     public function transkripNilaiView()
