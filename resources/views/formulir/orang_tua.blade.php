@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group col-12 col-md-6">
                             <label for="pendidikan_ayah">Pendidikan Terakhir <span class="text-danger">*</span></label>
-                            <select name="pendidikan_terakhir" id="pendidikan_terakhir" class="form-control" required>
+                            <select name="pendidikan_ayah" id="pendidikan_ayah" class="form-control" required>
                                 <option value="">Pendidikan Terakhir</option>
                                 <option value="SD/MI">SD/MI</option>
                                 <option value="SMP/MTs">SMP/MTs</option>
@@ -101,7 +101,7 @@
                                 <option value="TNI/Polri">TNI/Polri</option>
                                 <option value="Perangkat Desa">Perangkat Desa</option>
                                 <option value="Nelayan">Nelayan</option>
-                                <option value="Lainnya">Lainnya</option>>
+                                <option value="Lainnya">Lainnya</option>
                             </select>
                         </div>
                         <div class="form-group col-12 col-md-6">
@@ -154,7 +154,7 @@
                         </div>
                         <div class="form-group col-12 col-md-6">
                             <label for="pendidikan_ibu">Pendidikan Terakhir <span class="text-danger">*</span></label>
-                            <select name="pendidikan_terakhir" id="pendidikan_terakhir" class="form-control" required>
+                            <select name="pendidikan_ibu" id="pendidikan_ibu" class="form-control" required>
                                 <option value="">Pendidikan Terakhir</option>
                                 <option value="SD/MI">SD/MI</option>
                                 <option value="SMP/MTs">SMP/MTs</option>
