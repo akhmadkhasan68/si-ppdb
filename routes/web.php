@@ -23,7 +23,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['siswa'])->group(function () {
     Route::get('/isi_formulir', 'IsiFormulirController@index')->name('isi_formulir');
-    Route::get('/isi_formulir/1', 'IsiFormulirController@index')->name('isi_formulir');
+    Route::get('/isi_formulir/1', 'IsiFormulirController@isi_data')->name('isi_formulir');
     Route::get('/isi_formulir/2', 'IsiFormulirController@sekolahAsalView')->name('isi_formulir');
     Route::get('/isi_formulir/3', 'IsiFormulirController@orangTuaView')->name('isi_formulir');
     Route::get('/isi_formulir/4', 'IsiFormulirController@transkripNilaiView')->name('isi_formulir');

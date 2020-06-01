@@ -21,6 +21,21 @@ class IsiFormulirController extends Controller
 
     public function index()
     {
+        $count_data_ortu = DataOrtu::where('user_id', Auth::user()->id)->count();
+
+        if($count_data_ortu == 0)
+        {
+            return redirect('isi_formulir/3');
+        }
+        else
+        {
+            return redirect('isi_formulir/1');
+        }
+
+    }
+
+    public function isi_data()
+    {
         $data['data'] = dataDiri::where('user_id', Auth::user()->id)->first();
         $data['user_data'] = User::find(Auth::user()->id);
         $data['count'] = dataDiri::where('user_id', Auth::user()->id)->get();
