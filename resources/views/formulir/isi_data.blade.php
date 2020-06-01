@@ -319,6 +319,8 @@
                 error: function()
                 {
                     $('.loader').hide();
+
+                    alert('Error Data!');
                 }
             });
         });
@@ -368,6 +370,8 @@
                 error: function()
                 {
                     $('.loader').hide();
+
+                    alert('Error Data!');
                 }
             });
         });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
+use App\AsalSekolah;
 use App\dataDiri;
 use DataTables;
 use Validator;
@@ -234,7 +235,146 @@ class IsiFormulirController extends Controller
 
     public function sekolahAsalView()
     {
-        return view('formulir.sekolah_asal');
+        $data['data'] = AsalSekolah::where('user_id', Auth::user()->id)->first();
+        $data['user_data'] = User::find(Auth::user()->id);
+        $data['count'] = AsalSekolah::where('user_id', Auth::user()->id)->get();
+
+        return view('formulir.sekolah_asal', $data);
+    }
+
+    public function ajax_action_add_sekolah_asal(Request $request)
+    {
+        $attrs = [
+            'nama_sekolah' => 'Nama Sekolah',
+            'npsn' => 'NPSN',
+            'jenis_sekolah' => 'Jenis Sekolah',
+            'tahun_lulus' => 'Tahun Lulus',
+            'alamat' => 'Alamat'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => [
+                'required',
+                Rule::unique('table_sekolah_asal')
+            ],
+            'nama_sekolah' => 'required',
+            'npsn' => 'required',
+            'jenis_sekolah' => 'required',
+            'tahun_lulus' => 'required',
+            'alamat' => 'required'
+        ]);
+        $validator->setAttributeNames($attrs);
+
+        if($validator->fails())
+        {   
+            $errors = $validator->errors();
+            $json_data = [
+                'result' => false,
+                'form_error' => $errors->all(),
+                'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+                'redirect' => ''
+            ];
+
+            return json_encode($json_data); 
+            die();
+        }
+
+        $sekolahAsal = AsalSekolah::create([
+            'user_id' => $request->user_id,
+            'nama_sekolah' => $request->nama_sekolah,
+            'npsn' => $request->npsn,
+            'jenis_sekolah' => $request->jenis_sekolah,
+            'tahun_lulus' => $request->tahun_lulus,
+            'alamat' => $request->alamat,
+        ]);
+
+        if(!$sekolahAsal)
+        {
+            $json_data = [
+                'result' => false,
+                'form_error' => '',
+                'message' => ['head' => 'Gagal', 'body' => 'Ada kesalahan saat memasukkan data. Lakukan beberapa saat lagi!'],
+                'redirect' => ''
+            ];
+            return json_encode($json_data); 
+            die();
+        }
+
+        $json_data = [
+            'result' => true,
+            'form_error' => '',
+            'message' => ['head' => 'Berhasil', 'body' => 'Berhasil menambahkan sekolah asal!'],
+            'redirect' => '/isi_formulir/2'
+        ];
+
+        return json_encode($json_data);
+    }
+
+    public function ajax_action_update_sekolah_asal(Request $request)
+    {
+        $attrs = [
+            'nama_sekolah' => 'Nama Sekolah',
+            'npsn' => 'NPSN',
+            'jenis_sekolah' => 'Jenis Sekolah',
+            'tahun_lulus' => 'Tahun Lulus',
+            'alamat' => 'Alamat'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => [
+                'required',
+                Rule::unique('table_sekolah_asal')->ignore($request->id)
+            ],
+            'nama_sekolah' => 'required',
+            'npsn' => 'required',
+            'jenis_sekolah' => 'required',
+            'tahun_lulus' => 'required',
+            'alamat' => 'required'
+        ]);
+        $validator->setAttributeNames($attrs);
+
+        if($validator->fails())
+        {   
+            $errors = $validator->errors();
+            $json_data = [
+                'result' => false,
+                'form_error' => $errors->all(),
+                'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+                'redirect' => ''
+            ];
+
+            return json_encode($json_data); 
+            die();
+        }
+
+        $sekolahAsal = AsalSekolah::find($request->id);
+        $sekolahAsal->nama_sekolah = $request->nama_sekolah;
+        $sekolahAsal->npsn = $request->npsn;
+        $sekolahAsal->jenis_sekolah = $request->jenis_sekolah;
+        $sekolahAsal->tahun_lulus = $request->tahun_lulus;
+        $sekolahAsal->alamat = $request->alamat;
+        $sekolahAsal->save();
+
+        if(!$sekolahAsal)
+        {
+            $json_data = [
+                'result' => false,
+                'form_error' => '',
+                'message' => ['head' => 'Gagal', 'body' => 'Ada kesalahan saat mengubah data. Lakukan beberapa saat lagi!'],
+                'redirect' => ''
+            ];
+            return json_encode($json_data); 
+            die();
+        }
+
+        $json_data = [
+            'result' => true,
+            'form_error' => '',
+            'message' => ['head' => 'Berhasil', 'body' => 'Berhasil mengubah sekolah asal!'],
+            'redirect' => '/isi_formulir/2'
+        ];
+
+        return json_encode($json_data);
     }
 
     public function orangTuaView()
