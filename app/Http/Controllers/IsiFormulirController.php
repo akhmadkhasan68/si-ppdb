@@ -23,6 +23,7 @@ class IsiFormulirController extends Controller
         $data['data'] = dataDiri::where('user_id', Auth::user()->id)->first();
         $data['user_data'] = User::find(Auth::user()->id);
         $data['count'] = dataDiri::where('user_id', Auth::user()->id)->get();
+        $data['count_asal_sekolah'] = AsalSekolah::where('user_id', Auth::user()->id)->get();
 
         return view('formulir.isi_data', $data);
     }
