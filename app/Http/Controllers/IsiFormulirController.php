@@ -9,6 +9,7 @@ use App\AsalSekolah;
 use App\dataDiri;
 use App\DataOrtu;
 use DataTables;
+use App\Nilai;
 use Validator;
 use App\User;
 
@@ -41,6 +42,7 @@ class IsiFormulirController extends Controller
         $data['count'] = dataDiri::where('user_id', Auth::user()->id)->get();
         $data['count_asal_sekolah'] = AsalSekolah::where('user_id', Auth::user()->id)->get();
         $data['count_data_ortu'] = DataOrtu::where('user_id', Auth::user()->id)->get();
+        $data['count_nilai'] = Nilai::where('user_id', Auth::user()->id)->get();
 
         return view('formulir.isi_data', $data);
     }
@@ -253,10 +255,15 @@ class IsiFormulirController extends Controller
 
     public function sekolahAsalView()
     {
+        $check_step = dataDiri::where('user_id', Auth::user()->id)->count();
+        if($check_step == 0)
+            return redirect('isi_formulir/1');
+
         $data['data'] = AsalSekolah::where('user_id', Auth::user()->id)->first();
         $data['user_data'] = User::find(Auth::user()->id);
         $data['count'] = AsalSekolah::where('user_id', Auth::user()->id)->get();
         $data['count_data_ortu'] = DataOrtu::where('user_id', Auth::user()->id)->get();
+        $data['count_nilai'] = Nilai::where('user_id', Auth::user()->id)->get();
 
         return view('formulir.sekolah_asal', $data);
     }
@@ -398,9 +405,14 @@ class IsiFormulirController extends Controller
 
     public function orangTuaView()
     {
+        $check_step = AsalSekolah::where('user_id', Auth::user()->id)->count();
+        if($check_step == 0)
+            return redirect('isi_formulir/2');
+
         $data['data'] = DataOrtu::where('user_id', Auth::user()->id)->first();
         $data['user_data'] = User::find(Auth::user()->id);
         $data['count'] = DataOrtu::where('user_id', Auth::user()->id)->get();
+        $data['count_nilai'] = Nilai::where('user_id', Auth::user()->id)->get();
 
         return view('formulir.orang_tua', $data);
     }
@@ -619,7 +631,180 @@ class IsiFormulirController extends Controller
 
     public function transkripNilaiView()
     {
-        return view('formulir.transkrip_nilai');
+        $check_step = DataOrtu::where('user_id', Auth::user()->id)->count();
+        if($check_step == 0)
+            return redirect('isi_formulir/3');
+
+        $data['data'] = Nilai::where('user_id', Auth::user()->id)->first();
+        $data['user_data'] = User::find(Auth::user()->id);
+        $data['count'] = Nilai::where('user_id', Auth::user()->id)->get();
+
+        return view('formulir.transkrip_nilai', $data);
+    }
+
+    public function ajax_action_add_nilai(Request $request)
+    {
+        $attrs = [
+            'matematika' => 'Matematika',
+            'bahasa_indonesia' => 'Bahasa Indonesia',
+            'bahasa_inggris' => 'Bahasa Inggris',
+            'ipa' => 'IPA',
+            'semester_1' => 'Semester 1',
+            'semester_2' => 'Semester 2',
+            'semester_3' => 'Semester 3',
+            'semester_4' => 'Semester 4',
+            'semester_5' => 'Semester 5',
+            'semester_6' => 'Semester 6'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => [
+                'required',
+                Rule::unique('table_nilai')
+            ],
+            'matematika' => 'required|numeric',
+            'bahasa_indonesia' => 'required|numeric',
+            'bahasa_inggris' => 'required|numeric',
+            'ipa' => 'required|numeric',
+            'semester_1' => 'required|numeric',
+            'semester_2' => 'required|numeric',
+            'semester_3' => 'required|numeric',
+            'semester_4' => 'required|numeric',
+            'semester_5' => 'required|numeric',
+            'semester_6' => 'required|numeric'
+        ]);
+        $validator->setAttributeNames($attrs);
+
+        if($validator->fails())
+        {   
+            $errors = $validator->errors();
+            $json_data = [
+                'result' => false,
+                'form_error' => $errors->all(),
+                'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+                'redirect' => ''
+            ];
+
+            return json_encode($json_data); 
+            die();
+        }
+
+        $nilai = Nilai::create([
+            'user_id' => $request->user_id,
+            'matematika' => $request->matematika,
+            'bahasa_indonesia' => $request->bahasa_indonesia,
+            'bahasa_inggris' => $request->bahasa_inggris,
+            'ipa' => $request->ipa,
+            'semester_1' => $request->semester_1,
+            'semester_2' => $request->semester_2,
+            'semester_3' => $request->semester_3,
+            'semester_4' => $request->semester_4,
+            'semester_5' => $request->semester_5,
+            'semester_6' => $request->semester_6
+        ]);
+
+        if(!$nilai)
+        {
+            $json_data = [
+                'result' => false,
+                'form_error' => '',
+                'message' => ['head' => 'Gagal', 'body' => 'Ada kesalahan saat memasukkan data. Lakukan beberapa saat lagi!'],
+                'redirect' => ''
+            ];
+            return json_encode($json_data); 
+            die();
+        }
+
+        $json_data = [
+            'result' => true,
+            'form_error' => '',
+            'message' => ['head' => 'Berhasil', 'body' => 'Berhasil menambahkan data!'],
+            'redirect' => '/isi_formulir/4'
+        ];
+
+        return json_encode($json_data);
+    }
+
+    public function ajax_action_update_nilai(Request $request)
+    {
+        $attrs = [
+            'matematika' => 'Matematika',
+            'bahasa_indonesia' => 'Bahasa Indonesia',
+            'bahasa_inggris' => 'Bahasa Inggris',
+            'ipa' => 'IPA',
+            'semester_1' => 'Semester 1',
+            'semester_2' => 'Semester 2',
+            'semester_3' => 'Semester 3',
+            'semester_4' => 'Semester 4',
+            'semester_5' => 'Semester 5',
+            'semester_6' => 'Semester 6'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'user_id' => [
+                'required',
+                Rule::unique('table_nilai')->ignore($request->id)
+            ],
+            'matematika' => 'required|numeric',
+            'bahasa_indonesia' => 'required|numeric',
+            'bahasa_inggris' => 'required|numeric',
+            'ipa' => 'required|numeric',
+            'semester_1' => 'required|numeric',
+            'semester_2' => 'required|numeric',
+            'semester_3' => 'required|numeric',
+            'semester_4' => 'required|numeric',
+            'semester_5' => 'required|numeric',
+            'semester_6' => 'required|numeric'
+        ]);
+        $validator->setAttributeNames($attrs);
+
+        if($validator->fails())
+        {   
+            $errors = $validator->errors();
+            $json_data = [
+                'result' => false,
+                'form_error' => $errors->all(),
+                'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+                'redirect' => ''
+            ];
+
+            return json_encode($json_data); 
+            die();
+        }
+
+        $nilai = Nilai::find($request->id);
+        $nilai->matematika = $request->matematika;
+        $nilai->bahasa_indonesia = $request->bahasa_indonesia;
+        $nilai->bahasa_inggris = $request->bahasa_inggris;
+        $nilai->ipa = $request->ipa;
+        $nilai->semester_1 = $request->semester_1;
+        $nilai->semester_2 = $request->semester_2;
+        $nilai->semester_3 = $request->semester_3;
+        $nilai->semester_4 = $request->semester_4;
+        $nilai->semester_5 = $request->semester_5;
+        $nilai->semester_6 = $request->semester_6;
+        $nilai->save();
+
+        if(!$nilai)
+        {
+            $json_data = [
+                'result' => false,
+                'form_error' => '',
+                'message' => ['head' => 'Gagal', 'body' => 'Ada kesalahan saat memasukkan data. Lakukan beberapa saat lagi!'],
+                'redirect' => ''
+            ];
+            return json_encode($json_data); 
+            die();
+        }
+
+        $json_data = [
+            'result' => true,
+            'form_error' => '',
+            'message' => ['head' => 'Berhasil', 'body' => 'Berhasil mengubah data!'],
+            'redirect' => '/isi_formulir/4'
+        ];
+
+        return json_encode($json_data);
     }
 
     public function dokumenPendukung()

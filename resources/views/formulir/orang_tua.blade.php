@@ -32,7 +32,7 @@
                 Data Orang Tua / Wali
             </div>
         </div>
-        <div class="wizard-step">
+        <div class="wizard-step @if(count($count_nilai) > 0) wizard-step-success @endif">
             <div class="wizard-step-icon">
                 <i class="fas fa-sticky-note"></i>
             </div>
@@ -445,10 +445,10 @@
                     $("#provinsi_ayah").val(response.data.provinsi);
                     $("#kode_pos_ayah").val(response.data.kode_pos);
 
-                    $("#alamat_ayah").attr('disabled', true);
-                    $("#kota_ayah").attr('disabled', true);
-                    $("#provinsi_ayah").attr('disabled', true);
-                    $("#kode_pos_ayah").attr('disabled', true);
+                    $("#alamat_ayah").attr('readonly', true);
+                    $("#kota_ayah").attr('readonly', true);
+                    $("#provinsi_ayah").attr('readonly', true);
+                    $("#kode_pos_ayah").attr('readonly', true);
                 },
                 error: function()
                 {
@@ -465,10 +465,10 @@
             $("#provinsi_ayah").val("");
             $("#kode_pos_ayah").val("");
 
-            $("#alamat_ayah").attr('disabled', false);
-            $("#kota_ayah").attr('disabled', false);
-            $("#provinsi_ayah").attr('disabled', false);
-            $("#kode_pos_ayah").attr('disabled', false);
+            $("#alamat_ayah").attr('readonly', false);
+            $("#kota_ayah").attr('readonly', false);
+            $("#provinsi_ayah").attr('readonly', false);
+            $("#kode_pos_ayah").attr('readonly', false);
         }
 
     });
@@ -496,10 +496,10 @@
                     $("#provinsi_ibu").val(response.data.provinsi);
                     $("#kode_pos_ibu").val(response.data.kode_pos);
 
-                    $("#alamat_ibu").attr('disabled', true);
-                    $("#kota_ibu").attr('disabled', true);
-                    $("#provinsi_ibu").attr('disabled', true);
-                    $("#kode_pos_ibu").attr('disabled', true);
+                    $("#alamat_ibu").attr('readonly', true);
+                    $("#kota_ibu").attr('readonly', true);
+                    $("#provinsi_ibu").attr('readonly', true);
+                    $("#kode_pos_ibu").attr('readonly', true);
                 },
                 error: function()
                 {
@@ -516,10 +516,10 @@
             $("#provinsi_ibu").val("");
             $("#kode_pos_ibu").val("");
 
-            $("#alamat_ibu").attr('disabled', false);
-            $("#kota_ibu").attr('disabled', false);
-            $("#provinsi_ibu").attr('disabled', false);
-            $("#kode_pos_ibu").attr('disabled', false);
+            $("#alamat_ibu").attr('readonly', false);
+            $("#kota_ibu").attr('readonly', false);
+            $("#provinsi_ibu").attr('readonly', false);
+            $("#kode_pos_ibu").attr('readonly', false);
         }
 
     });
