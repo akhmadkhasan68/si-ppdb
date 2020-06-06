@@ -32,7 +32,7 @@
                 Data Orang Tua / Wali
             </div>
         </div>
-        <div class="wizard-step @if(count($count) > 0) wizard-step-success @else wizard-step-active @endif">
+        <div class="wizard-step wizard-step-active">
             <div class="wizard-step-icon">
                 <i class="fas fa-sticky-note"></i>
             </div>

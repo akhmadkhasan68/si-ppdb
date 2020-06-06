@@ -8,7 +8,7 @@
 <div class="row my-3">
     <div class="col-12 col-lg-12">
     <div class="wizard-steps">
-        <div class="wizard-step @if(count($count) > 0) wizard-step-success @else wizard-step-active @endif">
+        <div class="wizard-step wizard-step-active">
             <div class="wizard-step-icon">
                 <i class="fas fa-user"></i>
             </div>
