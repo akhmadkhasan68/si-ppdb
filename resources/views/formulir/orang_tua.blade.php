@@ -108,7 +108,15 @@
                             </div>
                             <div class="form-group col-12 col-md-6">
                                 <label for="gaji_ayah">Pendapatan / Bulan <span class="text-danger">*</span></label>
-                                <input id="gaji_ayah" type="text" class="form-control" name="gaji_ayah" placeholder="Masukkan pendapatan ayah / bulan" autofocus required>
+                                <!-- <input id="gaji_ayah" type="text" class="form-control" name="gaji_ayah" placeholder="Masukkan pendapatan ayah / bulan" autofocus required> -->
+                                <select name="gaji_ayah" id="gaji_ayah" class="form-control">
+                                    <option value="">Gaji Ayah</option>
+                                    <option value="Rp. 0">Rp. 0</option>
+                                    <option value="Rp. 1.000.000 - Rp. 5.000.000">Rp. 1.000.000 - Rp. 5.000.000</option>
+                                    <option value="Rp. 5.000.000 - Rp. 10.000.000">Rp. 5.000.000 - Rp. 10.000.000</option>
+                                    <option value="Rp. 10.000.000 - Rp. 20.000.000">Rp. 10.000.000 - Rp. 20.000.000</option>
+                                    <option value="> Rp. 20.000.000">> Rp. 20.000.000</option>
+                                </select>
                             </div>
                         </div>
                         
@@ -186,7 +194,15 @@
                             </div>
                             <div class="form-group col-12 col-md-6">
                                 <label for="gaji_ibu">Pendapatan / Bulan</label>
-                                <input id="gaji_ibu" type="text" class="form-control" name="gaji_ibu" placeholder="Masukkan pendapatan ibu / bulan">
+                                <!-- <input id="gaji_ibu" type="text" class="form-control" name="gaji_ibu" placeholder="Masukkan pendapatan ibu / bulan"> -->
+                                <select name="gaji_ibu" id="gaji_ibu" class="form-control">
+                                    <option value="">Gaji Ibu</option>
+                                    <option value="Rp. 0">Rp. 0</option>
+                                    <option value="Rp. 1.000.000 - Rp. 5.000.000">Rp. 1.000.000 - Rp. 5.000.000</option>
+                                    <option value="Rp. 5.000.000 - Rp. 10.000.000">Rp. 5.000.000 - Rp. 10.000.000</option>
+                                    <option value="Rp. 10.000.000 - Rp. 20.000.000">Rp. 10.000.000 - Rp. 20.000.000</option>
+                                    <option value="> Rp. 20.000.000">> Rp. 20.000.000</option>
+                                </select>
                             </div>
                         </div>
                         
@@ -277,7 +293,15 @@
                             </div>
                             <div class="form-group col-12 col-md-6">
                                 <label for="gaji_ayah">Pendapatan / Bulan <span class="text-danger">*</span></label>
-                                <input id="gaji_ayah" type="text" class="form-control" name="gaji_ayah" value="{{ $data->gaji_ayah }}" placeholder="Masukkan pendapatan ayah / bulan" autofocus required>
+                                <select name="gaji_ayah" id="gaji_ayah" class="form-control">
+                                    <option value="">Gaji Ayah</option>
+                                    <option value="Rp. 0" @if($data->gaji_ayah == 'Rp. 0') selected @endif>Rp. 0</option>
+                                    <option value="Rp. 1.000.000 - Rp. 5.000.000" @if($data->gaji_ayah == 'Rp. 1.000.000 - Rp. 5.000.000') selected @endif>Rp. 1.000.000 - Rp. 5.000.000</option>
+                                    <option value="Rp. 5.000.000 - Rp. 10.000.000" @if($data->gaji_ayah == 'Rp. 5.000.000 - Rp. 10.000.000') selected @endif>Rp. 5.000.000 - Rp. 10.000.000</option>
+                                    <option value="Rp. 10.000.000 - Rp. 20.000.000" @if($data->gaji_ayah == 'Rp. 10.000.000 - Rp. 20.000.000') selected @endif>Rp. 10.000.000 - Rp. 20.000.000</option>
+                                    <option value="> Rp. 20.000.000" @if($data->gaji_ayah == '> Rp. 20.000.000') selected @endif>> Rp. 20.000.000</option>
+                                </select>
+                                <!-- <input id="gaji_ayah" type="text" class="form-control" name="gaji_ayah" value="{{ $data->gaji_ayah }}" placeholder="Masukkan pendapatan ayah / bulan" autofocus required> -->
                             </div>
                         </div>
                         
@@ -355,7 +379,15 @@
                             </div>
                             <div class="form-group col-12 col-md-6">
                                 <label for="gaji_ibu">Pendapatan / Bulan</label>
-                                <input id="gaji_ibu" type="text" class="form-control" name="gaji_ibu" value="{{ $data->gaji_ibu }}" placeholder="Masukkan pendapatan ibu / bulan">
+                                <!-- <input id="gaji_ibu" type="text" class="form-control" name="gaji_ibu" value="{{ $data->gaji_ibu }}" placeholder="Masukkan pendapatan ibu / bulan"> -->
+                                <select name="gaji_ibu" id="gaji_ibu" class="form-control">
+                                    <option value="">Gaji Ibu</option>
+                                    <option value="Rp. 0" @if($data->gaji_ibu == 'Rp. 0') selected @endif>Rp. 0</option>
+                                    <option value="Rp. 1.000.000 - Rp. 5.000.000" @if($data->gaji_ibu == 'Rp. 1.000.000 - Rp. 5.000.000') selected @endif>Rp. 1.000.000 - Rp. 5.000.000</option>
+                                    <option value="Rp. 5.000.000 - Rp. 10.000.000" @if($data->gaji_ibu == 'Rp. 5.000.000 - Rp. 10.000.000') selected @endif>Rp. 5.000.000 - Rp. 10.000.000</option>
+                                    <option value="Rp. 10.000.000 - Rp. 20.000.000" @if($data->gaji_ibu == 'Rp. 10.000.000 - Rp. 20.000.000') selected @endif>Rp. 10.000.000 - Rp. 20.000.000</option>
+                                    <option value="> Rp. 20.000.000" @if($data->gaji_ibu == '> Rp. 20.000.000') selected @endif>> Rp. 20.000.000</option>
+                                </select>
                             </div>
                         </div>
                         
