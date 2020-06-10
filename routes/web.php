@@ -42,6 +42,9 @@ Route::middleware(['siswa'])->group(function () {
 
     Route::post('/isi_formulir/ajax_action_add_nilai', 'IsiFormulirController@ajax_action_add_nilai');
     Route::patch('/isi_formulir/ajax_action_update_nilai', 'IsiFormulirController@ajax_action_update_nilai');
+
+    Route::post('/isi_formulir/ajax_action_dokumen_pendukung', 'IsiFormulirController@ajax_action_dokumen_pendukung');
+    Route::patch('/isi_formulir/ajax_action_update_dokumen_pendukung', 'IsiFormulirController@ajax_action_update_dokumen_pendukung');
 });
 
 
