@@ -981,6 +981,159 @@ class IsiFormulirController extends Controller
         return json_encode($json_data);
     }
 
+    public function ajax_action_update_dokumen_pendukung(Request $request)
+    {
+        $attrs = [
+            'foto' => 'Foto',
+            'kk' => 'Kartu Keluarga',
+            'scan_raport' => 'Scan Raport',
+            'ijazah' => 'Ijazah'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'foto' => 'mimes:jpeg,bmp,png|max:2000|image|required',
+            'kk' => 'mimes:jpeg,bmp,png,pdf|max:2000|required',
+            'scan_raport' => 'mimes:jpeg,bmp,png,pdf|max:2000|required',
+            'ijazah' => 'mimes:jpeg,bmp,png,pdf|max:2000|required'
+        ]);
+        $validator->setAttributeNames($attrs);
+
+        if($validator->fails())
+        {
+            $errors = $validator->errors();
+            $json_data = [
+                'return' => false,
+                'form_error' => $errors->all(),
+                'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada beberapa form yang harus diisi!'],
+                'redirect' => ''
+            ];
+
+            return json_encode($json_data);
+            die();
+        }
+
+        //PROCESS UPLOAD FOTO
+        $fotoName = '';
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $upload_image = $this->upload_file($file, Auth::user()->username, 'foto');
+            if($upload_image == false)
+            {
+                $json_data = [
+                    'result' => false,
+                    'form_error' => '',
+                    'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada kesalahan saat mengupload gambar!'],
+                    'redirect' => ''
+                ];
+                return json_encode($json_data);
+                die();
+            }
+            $fotoName = 'foto.'.$file->getClientOriginalExtension();  
+        }else{
+            $fotoName = '';  
+        }
+
+        //PROCESS UPLOAD KK
+        $kkName = '';
+        if ($request->hasFile('kk')) {
+            $file = $request->file('kk');
+            $upload_image = $this->upload_file($file, Auth::user()->username, 'kk');
+            if($upload_image == false)
+            {
+                $json_data = [
+                    'result' => false,
+                    'form_error' => '',
+                    'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada kesalahan saat mengupload gambar!'],
+                    'redirect' => ''
+                ];
+                return json_encode($json_data);
+                die();
+            }
+            $kkName = 'kk.'.$file->getClientOriginalExtension();  
+        }else{
+            $kkName = '';  
+        }
+
+        //PROCESS UPLOAD SCAN RAPOT
+        $scanRaportName = '';
+        if ($request->hasFile('scan_raport')) {
+            $file = $request->file('scan_raport');
+            $upload_image = $this->upload_file($file, Auth::user()->username, 'scan_raport');
+            if($upload_image == false)
+            {
+                $json_data = [
+                    'result' => false,
+                    'form_error' => '',
+                    'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada kesalahan saat mengupload gambar!'],
+                    'redirect' => ''
+                ];
+                return json_encode($json_data);
+                die();
+            }
+            $scanRaportName = 'scan_raport.'.$file->getClientOriginalExtension();  
+        }else{
+            $scanRaportName = '';  
+        }
+
+        //PROCESS UPLOAD SCAN IJAZAH
+        $ijazahName = '';
+        if ($request->hasFile('ijazah')) {
+            $file = $request->file('ijazah');
+            $upload_image = $this->upload_file($file, Auth::user()->username, 'ijazah');
+            if($upload_image == false)
+            {
+                $json_data = [
+                    'result' => false,
+                    'form_error' => '',
+                    'message' => ['head' => 'Gagal', 'body' => 'Mohon maaf, ada kesalahan saat mengupload gambar!'],
+                    'redirect' => ''
+                ];
+                return json_encode($json_data);
+                die();
+            }
+            $ijazahName = 'ijazah.'.$file->getClientOriginalExtension();  
+        }else{
+            $ijazahName = '';  
+        }
+
+        $dokumenPendukung = DokumenPendukung::find($request->id);
+        $dokumenPendukung->foto = $fotoName;
+        $dokumenPendukung->kk = $kkName;
+        $dokumenPendukung->scan_raport = $scanRaportName;
+        $dokumenPendukung->ijazah = $ijazahName;
+        $dokumenPendukung->save();
+
+        // $dokumenPendukung = DokumenPendukung::create([
+        //     'user_id' => Auth::user()->id,
+        //     'foto' => $fotoName,
+        //     'kk' => $kkName,
+        //     'scan_raport' => $scanRaportName,
+        //     'ijazah' => $ijazahName
+        // ]);
+
+        if(!$dokumenPendukung)
+        {
+            $json_data = [
+                'result' => false,
+                'form_error' => '',
+                'message' => ['head' => 'Gagal', 'body' => 'Ada kesalahan saat menambahkan data. Mohon lakukan beberapa saat lagi!'],
+                'redirect' => ''
+            ];
+
+            return json_encode($json_data);
+            die();
+        }
+
+        $json_data = [
+            'result' => true,
+            'form_error' => '',
+            'message' => ['head' => 'Berhasil', 'body' => 'Berhasil merubah data dokumen!'],
+            'redirect' => '/isi_formulir/6'
+        ];
+
+        return json_encode($json_data);
+    }
+
     public function simpanPermanen()
     {
         $check_step = DokumenPendukung::where('user_id', Auth::user()->id)->count();
